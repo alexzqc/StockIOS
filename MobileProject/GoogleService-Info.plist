@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>899508256998-ess4igui8po1g6hn5aol0vq1rp99ue9d.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.899508256998-ess4igui8po1g6hn5aol0vq1rp99ue9d</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDRN3Mv191M1rCEg1xnAJQoT_ULNzA2mi0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>899508256998</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>AlexZiqiChen.MobileProject</string>
+	<key>PROJECT_ID</key>
+	<string>mobileproject-ac26a</string>
+	<key>STORAGE_BUCKET</key>
+	<string>mobileproject-ac26a.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:899508256998:ios:d4bd548a25f478021fbb27</string>
+	<key>DATABASE_URL</key>
+	<string>https://mobileproject-ac26a.firebaseio.com</string>
+</dict>
+</plist>
