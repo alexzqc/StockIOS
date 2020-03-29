@@ -28,7 +28,10 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     }
     }
         
-    @IBOutlet weak var stockSymbolLabel: UILabel!
+  @IBAction func showInfo(_ sender: Any) {
+    self.performSegue(withIdentifier: "viewPersonal", sender: self)
+  }
+  @IBOutlet weak var stockSymbolLabel: UILabel!
     @IBOutlet weak var stockOpenLabel: UILabel!
     @IBOutlet weak var stockTextField: UITextField!
     @IBOutlet weak var stockHighLabel: UILabel!
