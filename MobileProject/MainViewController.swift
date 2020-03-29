@@ -28,12 +28,14 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     }
     }
         
+  @IBOutlet weak var stockQuantity: UITextField!
   @IBAction func showInfo(_ sender: Any) {
     self.performSegue(withIdentifier: "viewPersonal", sender: self)
   }
   @IBOutlet weak var stockSymbolLabel: UILabel!
     @IBOutlet weak var stockOpenLabel: UILabel!
-    @IBOutlet weak var stockTextField: UITextField!
+  @IBOutlet weak var errMsg: UILabel!
+  @IBOutlet weak var stockTextField: UITextField!
     @IBOutlet weak var stockHighLabel: UILabel!
     @IBOutlet weak var stockLowLabel: UILabel!
     @IBOutlet weak var stockPriceLabel: UILabel!
@@ -60,6 +62,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         // Do any additional setup after loading the view.
         resetLabels()
         self.stockTextField.delegate = self
+      
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -67,8 +70,17 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         
     }
   func buyNow(){
-      
+    let textFromStockQuantity = stockQuantity.text
+    
+    var quantity = Int(textFromStockQuantity!)
+    
+    if quantity == nil{
+      errMsg.text = "Please enter a valid intager number"
+    }else{
+    
+    }
   }
+  
   func getStockQuote() {
   let session = URLSession.shared
   let quoteURL = URL(string: "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=\(stockTextField.text ?? "")&apikey=NGBZ2Y86AE32ZLWH")!

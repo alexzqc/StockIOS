@@ -273,13 +273,33 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YMw-Zi-1i2">
-                                <rect key="frame" x="143" y="783" width="61" height="30"/>
+                                <rect key="frame" x="249" y="785" width="61" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Buy Now"/>
                                 <connections>
                                     <action selector="stockBuyTapped:" destination="XAc-6A-pFR" eventType="touchUpInside" id="gmA-4U-CVf"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EjA-Y8-dPK">
+                                <rect key="frame" x="153" y="784" width="72" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Quanttity:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MMT-Vc-zIh">
+                                <rect key="frame" x="57" y="790" width="85" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fNt-1Y-m9U">
+                                <rect key="frame" x="48" y="761" width="278" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="qZe-fs-vwE"/>
@@ -294,6 +314,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="StockTextField" destination="cus-IR-GfB" id="3lv-xC-vKr"/>
+                        <outlet property="errMsg" destination="fNt-1Y-m9U" id="abt-n8-lQl"/>
                         <outlet property="stockChangeLabel" destination="mqz-OK-II6" id="LlA-dr-Vgc"/>
                         <outlet property="stockChangePercentLabel" destination="3aK-cO-bqc" id="UyW-7U-fFo"/>
                         <outlet property="stockHighLabel" destination="MIx-Bb-flA" id="2wh-08-v4C"/>
@@ -302,6 +323,7 @@
                         <outlet property="stockOpenLabel" destination="7tg-gZ-aaE" id="sFo-ZF-glV"/>
                         <outlet property="stockPreviousCloseLabel" destination="hYx-S5-HbN" id="zgF-2f-7SI"/>
                         <outlet property="stockPriceLabel" destination="9yS-ib-bY9" id="K8D-eK-N0V"/>
+                        <outlet property="stockQuantity" destination="EjA-Y8-dPK" id="3yy-FC-UdU"/>
                         <outlet property="stockSymbolLabel" destination="LG6-ZH-OhR" id="qpj-Jm-FtV"/>
                         <outlet property="stockTextField" destination="cus-IR-GfB" id="n06-ZR-bN4"/>
                         <outlet property="stockVolumeLabel" destination="kSU-Em-Nsh" id="wpT-VK-Iya"/>
