@@ -85,8 +85,8 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     if let user = Helper.CurrentUser, let stock = self.stock{
         if user.credit! > quantity * stock.price{
             print("bought stonks!")
-//            Helper.CurrentUser?.credit -= quantity * stock.price
-
+            
+            let balance = user.credit! - (quantity * stock.price)
             var dataToWrite = ["stocks" : []]
             
             //Send transaction to firebase HERE!!!
@@ -95,22 +95,25 @@ class MainViewController: UIViewController, UITextFieldDelegate {
                          "stockQuantity": quantity]
             
             //if myStocks exist
-            if let dictionary = Helper.CurrentUser?.stocks{
+            if var dictionary = Helper.CurrentUser?.stocks{
                 if var myStocks = dictionary["stocks"] {
                     myStocks.append(newStock)
+                    dictionary = ["stocks":myStocks]
                     dataToWrite = dictionary
                 }
                 else{
-                    Helper.CurrentUser?.stocks = ["stocks":[newStock]]
+                    dictionary = ["stocks":[newStock]]
                     dataToWrite = dictionary
                 }
+                Helper.CurrentUser?.stocks = dataToWrite
+                Helper.CurrentUser?.credit = balance
+
             }
-            
             
             let uid = Auth.auth().currentUser?.uid
             let users = Database.database().reference().child("Users")
             users.child(uid!).child("stocks").setValue(dataToWrite)
-            
+            users.child(uid!).child("balance").setValue(balance)
             //users.child(uid!).child("stocks").setValue(["stocks":dataToWrite])
 
 //            users.child(uid!).observeSingleEvent(of: .value) { (snapshot) in
@@ -124,7 +127,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
 //            }
         }
         else{
-            errMsg.text = "You're poor! Don't Assume."
+            errMsg.text = "Attempting to buy \(quantity * stock.price) with $\(user.credit!)."
             print(errMsg.text!)
         }
     }
@@ -162,7 +165,8 @@ self.stock = Stock()
   }
 //MOMO
   if let stringPrice = quoteDictionary.value(forKey: "05. price"){
-    if let price = Float(stringPrice as! String){
+    self.stockPriceLabel.text = stringPrice as? String
+    if let price = Float(self.stockPriceLabel.text!){
     self.stock!.price = price
     }
   }//END OF MOMO

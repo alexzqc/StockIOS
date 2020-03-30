@@ -16,7 +16,6 @@ class User: NSObject {
         name = dictionary["name"] as? String
         credit = dictionary["balance"] as? Float
         stocks = dictionary["stocks"] as? [String:[Any]]
-//        var list = stocks!["stocks"]
-        print("hello")
+        print("")
     }
 }
