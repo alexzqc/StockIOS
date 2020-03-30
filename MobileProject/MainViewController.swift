@@ -56,6 +56,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     buyNow()
   }
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    
     getStockQuote()
     self.view.endEditing(true)
     return false
@@ -136,6 +137,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
   }
   
   func getStockQuote() {
+  purchasedSuccess.text = "";
   let session = URLSession.shared
   let quoteURL = URL(string: "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=\(stockTextField.text ?? "")&apikey=NGBZ2Y86AE32ZLWH")!
   let dataTask = session.dataTask(with: quoteURL) {
@@ -225,7 +227,6 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     stockChangeLabel.text = "";
     stockChangePercentLabel.text = "";
     stockTextField.text = "";
-    purchasedSuccess.text = "";
     }
 }
 

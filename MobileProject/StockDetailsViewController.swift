@@ -21,7 +21,6 @@ class StockDetailsViewController: UIViewController {
   @IBOutlet weak var quantityIndicator: UILabel!
   @IBOutlet weak var stockName: UILabel!
   @IBOutlet weak var unitprice: UILabel!
-
   @IBOutlet weak var lowPrice: UILabel!
   @IBOutlet weak var hiPrice: UILabel!
   @IBOutlet weak var volumn: UILabel!
@@ -29,7 +28,8 @@ class StockDetailsViewController: UIViewController {
   @IBOutlet weak var previousDat: UILabel!
   @IBOutlet weak var changeInPercent: UILabel!
   @IBOutlet weak var change: UILabel!
-  
+  @IBOutlet weak var sellSuccess: UILabel!
+    
   override func viewDidLoad() {
         super.viewDidLoad()
         stockName.text = symbol
@@ -148,13 +148,14 @@ class StockDetailsViewController: UIViewController {
             }
           }
           }
+        self.sellSuccess.text = "Stock is sold successfully! Go back Stock search page to refresh your balance"
         }
     getDetails()
       }
     
     
 }
-    
+
     
 
     /*

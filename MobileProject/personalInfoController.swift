@@ -24,11 +24,11 @@ class personalInfoController: UIViewController, UITableViewDataSource, UITableVi
   
   @IBOutlet weak var nameDisplay: UILabel!
   override func viewDidLoad() {
-        super.viewDidLoad()
+      super.viewDidLoad()
       getInfo()
       stockTableView.delegate = self
       stockTableView.dataSource = self
-    
+
     let ref = Database.database().reference().child("Users").child(self.userID).child("stocks")
         // Do any additional setup after loading the view.
     
@@ -66,7 +66,6 @@ class personalInfoController: UIViewController, UITableViewDataSource, UITableVi
     return cell!
   }
     func getInfo(){
-
        let uid = Auth.auth().currentUser?.uid
        let messagesDB = Database.database().reference().child("Users")
        messagesDB.child(uid!).observeSingleEvent(of: .value) { (snapshot) in
@@ -77,16 +76,6 @@ class personalInfoController: UIViewController, UITableViewDataSource, UITableVi
            self.balanceDisplay.text = balanceString
          }
        }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
     }
-    */
-      
-}
+    
 }
