@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B3712322431E95600F7AA90 /* StockDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3712312431E95600F7AA90 /* StockDetailsViewController.swift */; };
+		1BB1635524313D3200D41AB8 /* personalInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB1635424313D3200D41AB8 /* personalInfoController.swift */; };
 		1BDCAEEE242D6AC900156487 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDCAEED242D6AC900156487 /* WelcomeViewController.swift */; };
 		1BDCAEF0242D6B4400156487 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDCAEEF242D6B4400156487 /* LoginViewController.swift */; };
 		1BDCAEF2242D6BB300156487 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDCAEF1242D6BB300156487 /* RegistrationViewController.swift */; };
@@ -23,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1B3712312431E95600F7AA90 /* StockDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockDetailsViewController.swift; sourceTree = "<group>"; };
+		1BB1635424313D3200D41AB8 /* personalInfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = personalInfoController.swift; sourceTree = "<group>"; };
 		1BDCAEED242D6AC900156487 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		1BDCAEEF242D6B4400156487 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1BDCAEF1242D6BB300156487 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
@@ -88,6 +92,8 @@
 				1BDCAEEF242D6B4400156487 /* LoginViewController.swift */,
 				1BDCAEF1242D6BB300156487 /* RegistrationViewController.swift */,
 				1BDCAEF3242DA67700156487 /* MainViewController.swift */,
+				1BB1635424313D3200D41AB8 /* personalInfoController.swift */,
+				1B3712312431E95600F7AA90 /* StockDetailsViewController.swift */,
 			);
 			path = MobileProject;
 			sourceTree = "<group>";
@@ -226,12 +232,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BDCAEF0242D6B4400156487 /* LoginViewController.swift in Sources */,
+				1BB1635524313D3200D41AB8 /* personalInfoController.swift in Sources */,
 				1BE2015E242D66DB00DC172F /* ViewController.swift in Sources */,
 				1BDCAEEE242D6AC900156487 /* WelcomeViewController.swift in Sources */,
 				1BE20164242D66DB00DC172F /* MobileProject.xcdatamodeld in Sources */,
 				1BDCAEF2242D6BB300156487 /* RegistrationViewController.swift in Sources */,
 				1BE2015A242D66DB00DC172F /* AppDelegate.swift in Sources */,
 				1BE2015C242D66DB00DC172F /* SceneDelegate.swift in Sources */,
+				1B3712322431E95600F7AA90 /* StockDetailsViewController.swift in Sources */,
 				1BDCAEF4242DA67700156487 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

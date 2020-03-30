@@ -7,10 +7,12 @@
 //
 
 import UIKit
-
+import Firebase
 
 class MainViewController: UIViewController, UITextFieldDelegate {
-
+  var userID = Auth.auth().currentUser!.uid
+  var stockSymbol = ""
+  
     @objc func dismissKeyboard() {
     //Causes the view (or one of its embedded text fields) to resign the first responder status.
     view.endEditing(true)
@@ -28,9 +30,14 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     }
     }
         
-    @IBOutlet weak var stockSymbolLabel: UILabel!
+  @IBOutlet weak var stockQuantity: UITextField!
+  @IBAction func showInfo(_ sender: Any) {
+    self.performSegue(withIdentifier: "viewPersonal", sender: self)
+  }
+  @IBOutlet weak var stockSymbolLabel: UILabel!
     @IBOutlet weak var stockOpenLabel: UILabel!
-    @IBOutlet weak var stockTextField: UITextField!
+  @IBOutlet weak var errMsg: UILabel!
+  @IBOutlet weak var stockTextField: UITextField!
     @IBOutlet weak var stockHighLabel: UILabel!
     @IBOutlet weak var stockLowLabel: UILabel!
     @IBOutlet weak var stockPriceLabel: UILabel!
@@ -39,14 +46,16 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var stockPreviousCloseLabel: UILabel!
     @IBOutlet weak var stockChangeLabel: UILabel!
     @IBOutlet weak var stockChangePercentLabel: UILabel!
-    @IBAction func stockSearchTapped(_ sender: Any) {
+  @IBOutlet weak var purchasedSuccess: UILabel!
+  @IBAction func stockSearchTapped(_ sender: Any) {
         getStockQuote()
         dismissKeyboard()
     }
-    @IBAction func stockBuyTapped(_ sender: Any) {
-        buyNow()
-    }
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+  
+  @IBAction func stockBuyTapped(_ sender: UIButton) {
+    buyNow()
+  }
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     getStockQuote()
     self.view.endEditing(true)
     return false
@@ -57,6 +66,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         // Do any additional setup after loading the view.
         resetLabels()
         self.stockTextField.delegate = self
+      
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -64,8 +74,67 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         
     }
   func buyNow(){
-      
+    let textFromStockQuantity = stockQuantity.text
+    let unitPrice = stockPriceLabel.text
+    let quantity = Int(textFromStockQuantity!)
+    let stockPrice = Double(unitPrice!)
+    let symbol:String = String(self.stockSymbolLabel.text!)
+    
+    if quantity == nil{
+      errMsg.text = "Please enter a valid intager number"
+    }else{
+     let messagesDB = Database.database().reference().child("Users")
+      messagesDB.child(userID).observeSingleEvent(of: .value) { (snapshot) in
+        if let dictionary = snapshot.value as? [String:AnyObject]{
+          var balance = dictionary["balance"] as? Double
+          let findstock = dictionary["stocks"]
+          let findstock1 = findstock?.value(forKey: symbol)
+          
+          let a = Double(quantity!)
+          let b = stockPrice
+          
+          balance = Double(balance!) - a*b!
+          
+          if Double(balance!) > 0 {
+          if findstock1 == nil{
+            let stock: [String: Any] = [
+                                        "stockSymbol": symbol,
+                                        "stockQuantity": quantity!]
+            
+            var ref: DatabaseReference!
+            ref = Database.database().reference().child("Users").child(self.userID)
+            let userReferencce = ref.child("stocks")
+            ref.updateChildValues(["balance" : balance!])
+            print(stock)
+            userReferencce.child(symbol).updateChildValues(stock)
+            
+            self.purchasedSuccess.text = "You have purchassed successfully!"
+          } else
+          {
+            let currentQuantity = (findstock1 as AnyObject).value(forKey: "stockQuantity") as? Int
+            let totalQuantity = currentQuantity! + quantity!
+            let stock: [String: Any] = [
+            "stockSymbol": symbol,
+            "stockQuantity": totalQuantity]
+            
+            var ref: DatabaseReference!
+            ref = Database.database().reference().child("Users").child(self.userID)
+            let userReferencce = ref.child("stocks")
+            ref.updateChildValues(["balance" : balance!])
+            userReferencce.child(symbol).updateChildValues(stock)
+            print(stock)
+            self.purchasedSuccess.text = "You have purchassed successfully!"
+          }
+          }else{
+            self.errMsg.text = "Insufficient funds!"
+          }
+          self.stockQuantity.text = ""
+          self.resetLabels()
+        }
+    }
   }
+  }
+  
   func getStockQuote() {
   let session = URLSession.shared
   let quoteURL = URL(string: "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=\(stockTextField.text ?? "")&apikey=NGBZ2Y86AE32ZLWH")!
@@ -94,7 +163,9 @@ class MainViewController: UIViewController, UITextFieldDelegate {
   }
   if let price = quoteDictionary.value(forKey: "05. price") {
   self.stockPriceLabel.text = price as? String
+    
   }
+    
   if let volume = quoteDictionary.value(forKey: "06. volume") {
   self.stockVolumeLabel.text = volume as? String
   }
@@ -153,5 +224,8 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     stockPreviousCloseLabel.text = "";
     stockChangeLabel.text = "";
     stockChangePercentLabel.text = "";
+    stockTextField.text = "";
+    purchasedSuccess.text = "";
     }
 }
+
