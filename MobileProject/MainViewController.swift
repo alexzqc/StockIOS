@@ -95,7 +95,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
           
           balance = Double(balance!) - a*b!
           
-          if Double(balance!) >= 0 {
+          if Double(balance!) > 0 {
           if findstock1 == nil{
             let stock: [String: Any] = [
                                         "stockSymbol": symbol,
@@ -224,6 +224,8 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     stockPreviousCloseLabel.text = "";
     stockChangeLabel.text = "";
     stockChangePercentLabel.text = "";
+    stockTextField.text = "";
+    purchasedSuccess.text = "";
     }
 }
 
