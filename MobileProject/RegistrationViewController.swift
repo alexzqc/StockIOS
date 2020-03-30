@@ -37,7 +37,7 @@ class RegistrationViewController: UIViewController {
                                     "stockName": stockName,
                                     "stockQuantity": stockQuantity]
         
-        let stocks: [String: Any] = ["stock": stock]
+        let stocks: [String: [Any]] = ["stocks": [stock]]
         
         let user:[String: Any] = ["name": email,
                                   "balance": balance,

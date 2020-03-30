@@ -25,6 +25,23 @@ class LoginViewController: UIViewController {
       }else{
         print("Logged in as")
         print(user!.user.email)
+        
+        //MOMO
+        guard let userId = Auth.auth().currentUser?.uid else{
+            // for some reason userId is nil
+            return
+        }
+        Database.database().reference().child("Users").child(userId).observeSingleEvent(of: .value, with: { (snapshot) in
+            if let dictionary = snapshot.value as? [String: AnyObject]{
+                //self.navigationItem.title = dictionary["name"] as? String
+                
+                let user = User(dictionary)
+                user.id = snapshot.key
+                Helper.CurrentUser = user
+            }
+        }, withCancel: nil)
+        //END
+        
         self.performSegue(withIdentifier: "showStockFromLogin", sender: self)
       }
     }

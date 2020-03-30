@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 
 class MainViewController: UIViewController, UITextFieldDelegate {
@@ -27,7 +28,8 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     self.view.frame.origin.y = 0
     }
     }
-        
+   
+    var stock : Stock?
   @IBOutlet weak var stockQuantity: UITextField!
   @IBAction func showInfo(_ sender: Any) {
     self.performSegue(withIdentifier: "viewPersonal", sender: self)
@@ -59,6 +61,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view.
         resetLabels()
         self.stockTextField.delegate = self
@@ -70,15 +73,62 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         
     }
   func buyNow(){
-    let textFromStockQuantity = stockQuantity.text
     
-    var quantity = Int(textFromStockQuantity!)
-    
-    if quantity == nil{
-      errMsg.text = "Please enter a valid intager number"
-    }else{
-    
+    let textFromStockQuantity = stockQuantity.text!
+    guard let quantity = Float(textFromStockQuantity as String) else{
+        errMsg.text = "Please enter a valid intager number"
+        print(errMsg.text!)
+        return
     }
+    
+    //MOMO
+    if let user = Helper.CurrentUser, let stock = self.stock{
+        if user.credit! > quantity * stock.price{
+            print("bought stonks!")
+//            Helper.CurrentUser?.credit -= quantity * stock.price
+
+            var dataToWrite = ["stocks" : []]
+            
+            //Send transaction to firebase HERE!!!
+            let newStock : [String : Any] = ["id": 0,
+                         "stockName": stock.symbol,
+                         "stockQuantity": quantity]
+            
+            //if myStocks exist
+            if let dictionary = Helper.CurrentUser?.stocks{
+                if var myStocks = dictionary["stocks"] {
+                    myStocks.append(newStock)
+                    dataToWrite = dictionary
+                }
+                else{
+                    Helper.CurrentUser?.stocks = ["stocks":[newStock]]
+                    dataToWrite = dictionary
+                }
+            }
+            
+            
+            let uid = Auth.auth().currentUser?.uid
+            let users = Database.database().reference().child("Users")
+            users.child(uid!).child("stocks").setValue(dataToWrite)
+            
+            //users.child(uid!).child("stocks").setValue(["stocks":dataToWrite])
+
+//            users.child(uid!).observeSingleEvent(of: .value) { (snapshot) in
+//                if let dictionary = snapshot.value as? [String:AnyObject]{
+//                    self.nameDisplay.text = dictionary["name"] as? String
+//                    let balance = dictionary["balance"] as? Double
+//                    let balanceString = String(format:"%.2f",balance!)
+//                    self.balanceDisplay.text = balanceString
+//                }
+//                print(snapshot)
+//            }
+        }
+        else{
+            errMsg.text = "You're poor! Don't Assume."
+            print(errMsg.text!)
+        }
+    }
+    //END of MOMO
   }
   
   func getStockQuote() {
@@ -95,8 +145,11 @@ class MainViewController: UIViewController, UITextFieldDelegate {
   if let jsonObj = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? NSDictionary {
   if let quoteDictionary = jsonObj.value(forKey: "Global Quote") as? NSDictionary {
   DispatchQueue.main.async {
+  
+self.stock = Stock()
   if let symbol = quoteDictionary.value(forKey: "01. symbol") {
   self.stockSymbolLabel.text = symbol as? String
+    self.stock!.symbol = symbol as! String //MOMO
   }
   if let open = quoteDictionary.value(forKey: "02. open") {
   self.stockOpenLabel.text = open as? String
@@ -107,9 +160,12 @@ class MainViewController: UIViewController, UITextFieldDelegate {
   if let low = quoteDictionary.value(forKey: "04. low") {
   self.stockLowLabel.text = low as? String
   }
-  if let price = quoteDictionary.value(forKey: "05. price") {
-  self.stockPriceLabel.text = price as? String
-  }
+//MOMO
+  if let stringPrice = quoteDictionary.value(forKey: "05. price"){
+    if let price = Float(stringPrice as! String){
+    self.stock!.price = price
+    }
+  }//END OF MOMO
   if let volume = quoteDictionary.value(forKey: "06. volume") {
   self.stockVolumeLabel.text = volume as? String
   }
