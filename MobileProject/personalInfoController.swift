@@ -66,6 +66,7 @@ class personalInfoController: UIViewController, UITableViewDataSource, UITableVi
     return cell!
   }
     func getInfo(){
+
        let uid = Auth.auth().currentUser?.uid
        let messagesDB = Database.database().reference().child("Users")
        messagesDB.child(uid!).observeSingleEvent(of: .value) { (snapshot) in

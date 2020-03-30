@@ -21,6 +21,7 @@ class StockDetailsViewController: UIViewController {
   @IBOutlet weak var quantityIndicator: UILabel!
   @IBOutlet weak var stockName: UILabel!
   @IBOutlet weak var unitprice: UILabel!
+
   @IBOutlet weak var lowPrice: UILabel!
   @IBOutlet weak var hiPrice: UILabel!
   @IBOutlet weak var volumn: UILabel!
