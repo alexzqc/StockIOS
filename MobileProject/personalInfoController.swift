@@ -9,7 +9,14 @@
 import UIKit
 import Firebase
 
-class personalInfoController: UIViewController {
+class personalInfoController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+
+  
+  var userID = Auth.auth().currentUser!.uid
+  var postdata = [String]()
+  
+  
+  @IBOutlet weak var stockTableView: UITableView!
   
   @IBOutlet weak var balanceDisplay: UILabel!
   
@@ -17,9 +24,45 @@ class personalInfoController: UIViewController {
   override func viewDidLoad() {
         super.viewDidLoad()
       getInfo()
+    
+      stockTableView.delegate = self
+      stockTableView.dataSource = self
+    
+    let ref = Database.database().reference().child("Users").child(self.userID).child("stocks")
         // Do any additional setup after loading the view.
+    
+    ref.observeSingleEvent(of: .value) { (snapshot) in
+     for child in snapshot.children {
+     let snap = child as! DataSnapshot
+     let post = snap.key as? String
+      if let actualPost = post {
+      self.postdata.append(actualPost)
+         self.stockTableView.reloadData()
+      }
+      }
+      
+      //let post = snapshot.key as? String
+     //
+      //if let actualPost = post {
+      //  self.postdata.append(actualPost)
+        
+      //  self.stockTableView.reloadData()
+     // }
     }
+    }
+  
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+     return postdata.count
+   }
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = stockTableView.dequeueReusableCell(withIdentifier: "stockView")
+    cell?.textLabel?.text = postdata[indexPath.row]
+    
+    return cell!
+  }
     func getInfo(){
+      
        let uid = Auth.auth().currentUser?.uid
        let messagesDB = Database.database().reference().child("Users")
        messagesDB.child(uid!).observeSingleEvent(of: .value) { (snapshot) in
@@ -29,7 +72,6 @@ class personalInfoController: UIViewController {
            let balanceString = String(format:"%.2f",balance!)
            self.balanceDisplay.text = balanceString
          }
-         print(snapshot)
        }
 
     /*
@@ -41,6 +83,6 @@ class personalInfoController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+      
 }
 }

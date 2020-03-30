@@ -31,23 +31,15 @@ class RegistrationViewController: UIViewController {
       } else {
         let uid = user!.user.uid
         let balance = 10000
-        let stockName = ""
-        let stockQuantity = 0.0
-        let stock: [String: Any] = ["id": 0,
-                                    "stockName": stockName,
-                                    "stockQuantity": stockQuantity]
-        
-        let stocks: [String: Any] = ["stock": stock]
         
         let user:[String: Any] = ["name": email,
-                                  "balance": balance,
-                                  "stocks": stocks]
+                                  "balance": balance]
         var ref: DatabaseReference!
         ref = Database.database().reference()
         let userReferencce = ref.child("Users").child(uid)
         userReferencce.updateChildValues(user, withCompletionBlock: {(error,ref) in
           if(error != nil){
-            print(error)
+            print(error!)
             return
           }
           print("successfully created user " + email)
