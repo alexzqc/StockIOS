@@ -14,6 +14,8 @@ class personalInfoController: UIViewController, UITableViewDataSource, UITableVi
   
   var userID = Auth.auth().currentUser!.uid
   var postdata = [String]()
+  var stockName = ""
+  var quantityTotal = 0
   
   
   @IBOutlet weak var stockTableView: UITableView!
@@ -36,20 +38,22 @@ class personalInfoController: UIViewController, UITableViewDataSource, UITableVi
      let snap = child as! DataSnapshot
      let post = snap.key as? String
       if let actualPost = post {
-      self.postdata.append(actualPost)
+        self.postdata.append(actualPost)
          self.stockTableView.reloadData()
       }
       }
       
-      //let post = snapshot.key as? String
-     //
-      //if let actualPost = post {
-      //  self.postdata.append(actualPost)
-        
-      //  self.stockTableView.reloadData()
-     // }
     }
     }
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if let stockDetailsController = segue.destination as? StockDetailsViewController, let index = stockTableView.indexPathForSelectedRow?.row
+    {
+      print(postdata)
+      print(index)
+      print(postdata[index])
+      stockDetailsController.symbol = postdata[index]
+    }
+  }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
      return postdata.count
@@ -57,8 +61,9 @@ class personalInfoController: UIViewController, UITableViewDataSource, UITableVi
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = stockTableView.dequeueReusableCell(withIdentifier: "stockView")
+    let a = postdata[indexPath.row]
     cell?.textLabel?.text = postdata[indexPath.row]
-    
+    stockName = a
     return cell!
   }
     func getInfo(){
