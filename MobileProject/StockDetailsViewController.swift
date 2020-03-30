@@ -136,8 +136,10 @@ class StockDetailsViewController: UIViewController {
               if let dictionary = snapshot.value as?[String:AnyObject]{
                 var b = dictionary["balance"] as? Double
                 b = b! + Double(quantity!) * stockPrice!
+                ref1.updateChildValues(["balance": b!])
               }
             }
+            
             if(a != 0){
             ref.updateChildValues(["stockQuantity": a!])
             }else{
