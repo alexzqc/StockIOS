@@ -7,7 +7,7 @@ Function: Login/Logout, Buy/Sell stock, Get stock information from API, Portfoli
 
 Database: Firebase
 
-![image](2020-03-30 (1).png)
+![image](2020-03-30(1).png)
 Once user registed, user account deatails appeared here, uid will be the primary key for the user's database
 
 ![image](2020-03-30.png)
