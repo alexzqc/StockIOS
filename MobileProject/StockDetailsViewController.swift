@@ -13,6 +13,11 @@ class StockDetailsViewController: UIViewController {
   var symbol = ""
   var userID = Auth.auth().currentUser!.uid
   
+  @IBOutlet weak var errMsg: UILabel!
+  @IBOutlet weak var sellingQuantity: UITextField!
+  @IBAction func sellButton(_ sender: Any) {
+    sellStock()
+  }
   @IBOutlet weak var quantityIndicator: UILabel!
   @IBOutlet weak var stockName: UILabel!
   @IBOutlet weak var unitprice: UILabel!
@@ -24,6 +29,7 @@ class StockDetailsViewController: UIViewController {
   @IBOutlet weak var previousDat: UILabel!
   @IBOutlet weak var changeInPercent: UILabel!
   @IBOutlet weak var change: UILabel!
+  
   override func viewDidLoad() {
         super.viewDidLoad()
         stockName.text = symbol
@@ -102,6 +108,53 @@ class StockDetailsViewController: UIViewController {
   }
   dataTask.resume()
   }
+  
+  func sellStock(){
+    let textFromStockQuantity = sellingQuantity.text
+    let unitPrice = unitprice.text
+    let quantity = Int(textFromStockQuantity!)
+    let stockPrice = Double(unitPrice!)
+    
+    if quantity == nil{
+      errMsg.text = "Please enter a valid intager number"
+      sellingQuantity.text = ""
+    }else{
+      let ref = Database.database().reference().child("Users").child(self.userID).child("stocks").child(symbol)
+      
+      ref.observeSingleEvent(of: .value) { (snapshot) in
+        if let dictionary = snapshot.value as? [String:AnyObject]{
+          var a = dictionary["stockQuantity"] as? Int
+          if Int(a!) < Int(quantity!){
+            self.errMsg.text = "You do not have enough stock to sell"
+            self.sellingQuantity.text = ""
+          }else{
+            a = a! - quantity!
+            
+            let ref1 = Database.database().reference().child("Users").child(self.userID)
+            
+            ref1.observeSingleEvent(of: .value) { (snapshot) in
+              if let dictionary = snapshot.value as?[String:AnyObject]{
+                var b = dictionary["balance"] as? Double
+                b = b! + Double(quantity!) * stockPrice!
+              }
+            }
+            if(a != 0){
+            ref.updateChildValues(["stockQuantity": a!])
+            }else{
+              ref.removeValue()
+            }
+            }
+          }
+          }
+        }
+    getDetails()
+      }
+    
+    
+}
+    
+    
+
     /*
     // MARK: - Navigation
 
@@ -112,4 +165,5 @@ class StockDetailsViewController: UIViewController {
     }
     */
 
-}
+
+

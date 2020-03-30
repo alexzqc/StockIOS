@@ -558,6 +558,34 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Quantity: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1hG-BF-FA5">
+                                <rect key="frame" x="52" y="545" width="89" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DZ6-y4-K7F">
+                                <rect key="frame" x="129" y="545" width="97" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MRl-Wn-ffQ">
+                                <rect key="frame" x="242" y="545" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Sell"/>
+                                <connections>
+                                    <action selector="sellButton:" destination="qZ2-gv-erJ" eventType="touchUpInside" id="fuu-YE-dBl"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ji-qz-iaa">
+                                <rect key="frame" x="35" y="597" width="297" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="4PJ-vO-Rfr"/>
@@ -566,11 +594,13 @@
                     <connections>
                         <outlet property="change" destination="hLI-9G-NvU" id="4UB-Ls-As8"/>
                         <outlet property="changeInPercent" destination="PPP-tD-6te" id="b2h-Lj-zPm"/>
+                        <outlet property="errMsg" destination="4Ji-qz-iaa" id="QNK-lB-wUK"/>
                         <outlet property="hiPrice" destination="SLb-aI-cTJ" id="NPY-u8-2r7"/>
                         <outlet property="latestTradingDay" destination="7Rd-LM-jFZ" id="b4x-SB-uUZ"/>
                         <outlet property="lowPrice" destination="zqK-P6-bpo" id="Mt4-7v-RYE"/>
                         <outlet property="previousDat" destination="KiV-Ih-Lqn" id="LHd-vx-hUW"/>
                         <outlet property="quantityIndicator" destination="vB6-UL-nNw" id="jNi-YK-GmV"/>
+                        <outlet property="sellingQuantity" destination="DZ6-y4-K7F" id="IJN-mg-1IR"/>
                         <outlet property="stockName" destination="Wov-7h-5iu" id="Gep-cR-7O8"/>
                         <outlet property="unitprice" destination="Bio-zp-2r9" id="AeB-Dc-oxp"/>
                         <outlet property="volumn" destination="V8q-Y6-3Rh" id="Smv-gP-VUx"/>
