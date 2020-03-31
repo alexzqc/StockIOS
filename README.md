@@ -3,9 +3,10 @@ Mobile Project
 
 The mobile is build based on Swift.
 
-Function: Login/Logout, Buy/Sell stock, Get stock information from API, Portfolio
+Function: Login/Logout(Alex), Buy/Sell stock(Alex/Neil), Get stock information from API(Winson), Portfolio graph(Alex),
+          Personal information with stock detail page(Alex)
 
-Database: Firebase
+Database: Firebase(Alex)
 
 ![image](auth.png) 
 Once user registed, user account deatails appeared here, uid will be the primary key for the user's database
