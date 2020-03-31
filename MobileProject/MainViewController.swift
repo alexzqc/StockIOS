@@ -67,7 +67,8 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         // Do any additional setup after loading the view.
         resetLabels()
         self.stockTextField.delegate = self
-      
+      let date = Date()
+      print(date)
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -88,6 +89,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
       messagesDB.child(userID).observeSingleEvent(of: .value) { (snapshot) in
         if let dictionary = snapshot.value as? [String:AnyObject]{
           var balance = dictionary["balance"] as? Double
+          var history = dictionary["balanceHistory"] as? [Double]
           let findstock = dictionary["stocks"]
           let findstock1 = findstock?.value(forKey: symbol)
           
@@ -102,11 +104,13 @@ class MainViewController: UIViewController, UITextFieldDelegate {
                                         "stockSymbol": symbol,
                                         "stockQuantity": quantity!]
             
+            history!.append(balance!)
+            print(history)
             var ref: DatabaseReference!
             ref = Database.database().reference().child("Users").child(self.userID)
             let userReferencce = ref.child("stocks")
             ref.updateChildValues(["balance" : balance!])
-            print(stock)
+            ref.updateChildValues(["balanceHistory" : history!])
             userReferencce.child(symbol).updateChildValues(stock)
             
             self.purchasedSuccess.text = "You have purchassed successfully!"
@@ -118,10 +122,12 @@ class MainViewController: UIViewController, UITextFieldDelegate {
             "stockSymbol": symbol,
             "stockQuantity": totalQuantity]
             
+            history!.append(balance!)
             var ref: DatabaseReference!
             ref = Database.database().reference().child("Users").child(self.userID)
             let userReferencce = ref.child("stocks")
             ref.updateChildValues(["balance" : balance!])
+            ref.updateChildValues(["balanceHistory" : history!])
             userReferencce.child(symbol).updateChildValues(stock)
             print(stock)
             self.purchasedSuccess.text = "You have purchassed successfully!"

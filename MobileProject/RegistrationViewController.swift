@@ -31,9 +31,10 @@ class RegistrationViewController: UIViewController {
       } else {
         let uid = user!.user.uid
         let balance = 10000
-        
+        let balanceHistory:[Double] = [10000]
         let user:[String: Any] = ["name": email,
-                                  "balance": balance]
+                                  "balance": balance,
+                                  "balanceHistory": balanceHistory]
         var ref: DatabaseReference!
         ref = Database.database().reference()
         let userReferencce = ref.child("Users").child(uid)
