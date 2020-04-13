@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ioN-GK-eHB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ioN-GK-eHB">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -11,12 +11,12 @@
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="WelcomeViewController" customModule="MobileProject" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WIn-F9-vd9">
-                                <rect key="frame" x="70" y="351" width="240" height="227"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WIn-F9-vd9">
+                                <rect key="frame" x="70" y="351" width="274" height="227"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tac-7n-tz7">
                                         <rect key="frame" x="8" y="8" width="258" height="80"/>
@@ -391,10 +391,10 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="stockView" id="LKS-hb-AtK">
-                                        <rect key="frame" x="0.0" y="28" width="421" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="421" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LKS-hb-AtK" id="Gh7-fs-MtJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="421" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="421" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <connections>
@@ -407,7 +407,13 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="cMq-iO-uFV"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Stock Watchlist" id="Ph0-vr-dDl"/>
+                    <navigationItem key="navigationItem" title="Stock Watchlist" id="Ph0-vr-dDl">
+                        <barButtonItem key="rightBarButtonItem" title="Performance" id="4mM-Cl-T9Q">
+                            <connections>
+                                <segue destination="mkW-uH-97E" kind="show" id="G7u-Gc-JdH"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="balanceDisplay" destination="Rce-to-Lj2" id="pdm-nT-8qm"/>
                         <outlet property="nameDisplay" destination="31o-Se-K6a" id="elZ-2O-Jx9"/>
@@ -417,6 +423,22 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gap-Kh-bUM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3482.608695652174" y="97.767857142857139"/>
+        </scene>
+        <!--Perfoamance-->
+        <scene sceneID="vL5-nA-Vec">
+            <objects>
+                <viewController id="mkW-uH-97E" customClass="PerfoamanceViewController" customModule="MobileProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="tYk-GM-etn">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="eCT-Y2-JwM"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Perfoamance" id="B1k-xb-OGD"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VRQ-xG-HWT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4238" y="-431"/>
         </scene>
         <!--Stock Details-->
         <scene sceneID="PyS-64-Bt0">
@@ -624,7 +646,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bJL-J5-GvH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4498.5507246376819" y="97.767857142857139"/>
+            <point key="canvasLocation" x="4291" y="349"/>
         </scene>
         <!--Register-->
         <scene sceneID="Up5-ZD-1ID">

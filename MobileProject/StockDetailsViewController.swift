@@ -135,8 +135,14 @@ class StockDetailsViewController: UIViewController {
             ref1.observeSingleEvent(of: .value) { (snapshot) in
               if let dictionary = snapshot.value as?[String:AnyObject]{
                 var b = dictionary["balance"] as? Double
+                var history = dictionary["balanceHistory"] as? [Double]
+                
+                
+                
                 b = b! + Double(quantity!) * stockPrice!
+                history!.append(b!)
                 ref1.updateChildValues(["balance": b!])
+                ref1.updateChildValues(["balanceHistory" : history!])
               }
             }
             
